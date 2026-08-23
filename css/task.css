@@ -350,6 +350,38 @@ textarea {
 }
 
 
+.clear-completed-button {
+    background: transparent;
+
+    color: white;
+
+    border: 1.5px solid white;
+
+    padding: 12px 20px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    margin-left: 10px;
+
+    transition: 0.3s;
+}
+
+
+.clear-completed-button:hover {
+    background: white;
+
+    color: #4f46e5;
+
+    transform: translateY(-2px);
+}
+
+
 /* =========================
    STATISTICS
 ========================= */
