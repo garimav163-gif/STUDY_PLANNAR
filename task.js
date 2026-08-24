@@ -5,6 +5,7 @@
 const taskModal = document.getElementById("taskModal");
 
 const addTaskButton = document.getElementById("addTaskButton");
+const clearCompletedButton = document.getElementById("clearCompletedButton");
 
 const closeModal = document.getElementById("closeModal");
 
@@ -93,6 +94,13 @@ let editingTaskId = null;
 // ===============================
 // OPEN MODAL
 // ===============================
+
+clearCompletedButton.addEventListener("click", function () {
+
+    clearCompletedTasks();
+
+});
+
 
 addTaskButton.addEventListener("click", function () {
 
@@ -899,6 +907,58 @@ function deleteTask(id) {
     tasks = tasks.filter(function (task) {
 
         return task.id !== id;
+
+    });
+
+
+    saveTasks();
+
+    displayTasks();
+
+    updateStatistics();
+
+}
+
+
+// ===============================
+// CLEAR COMPLETED TASKS
+// ===============================
+
+function clearCompletedTasks() {
+
+    const completedCount =
+        tasks.filter(function (task) {
+
+            return task.status === "Completed";
+
+        }).length;
+
+
+    if (completedCount === 0) {
+
+        alert("No completed tasks to clear!");
+
+        return;
+
+    }
+
+
+    const answer =
+        confirm(
+            "Remove all " + completedCount + " completed task(s)?"
+        );
+
+
+    if (!answer) {
+
+        return;
+
+    }
+
+
+    tasks = tasks.filter(function (task) {
+
+        return task.status !== "Completed";
 
     });
 
