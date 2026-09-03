@@ -359,7 +359,7 @@
                 >
 
 
-                <label>
+                <!-- <label>
                     Subject
                 </label>
 
@@ -369,7 +369,31 @@
                         No Subject Added
                     </option>
 
-                </select>
+                </select> -->
+                <label>
+                    Subject
+                </label>
+
+                <div class="subject-row">
+
+                    <select id="noteSubject">
+
+                    <option value="">
+                    No Subject Added
+                    </option>
+
+                    </select>
+
+                    <button
+                        type="button"
+                        class="add-subject-small"
+                        onclick="openSubjectPopup()">
+
+                        + Add Subject
+
+                    </button>
+
+                </div>
 
 
                 <label>

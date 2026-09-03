@@ -1,30 +1,51 @@
 pipeline {
     agent any
+
     stages {
         stage('Checkout') {
             steps {
                 echo 'Code checked out from GitHub'
             }
         }
-        stage('Verify Files') {
-            steps {
-                bat 'if exist index.html (echo index.html found) else (echo MISSING index.html && exit 1)'
-                bat 'if exist landing.html (echo landing.html found) else (echo MISSING landing.html && exit 1)'
-                bat 'if exist signup.html (echo signup.html found) else (echo MISSING signup.html && exit 1)'
-            }
-        }
+
         stage('Build') {
             steps {
-                echo 'Static site verified — ready to deploy'
+                bat 'echo Building Study Planner project...'
+                bat 'if not exist index.html exit /b 1'
+                bat 'if not exist landing.html exit /b 1'
+                bat 'if not exist signup.html exit /b 1'
+            }
+        }
+
+        stage('Code Quality') {
+            steps {
+                bat 'echo Checking project files...'
+                bat 'if not exist css exit /b 1'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                bat 'echo Running basic project checks...'
+                bat 'if not exist Notes.html exit /b 1'
+                bat 'if not exist task.html exit /b 1'
+            }
+        }
+
+        stage('Package') {
+            steps {
+                bat 'powershell -Command "Compress-Archive -Path * -DestinationPath study-planner.zip -Force"'
+                archiveArtifacts artifacts: 'study-planner.zip', fingerprint: true
             }
         }
     }
+
     post {
         success {
-            echo 'SUCCESS: all files present and verified.'
+            echo 'SUCCESS: all stages passed and the Study Planner project was packaged.'
         }
         failure {
-            echo 'FAILURE: something is missing. Check the failed stage.'
+            echo 'FAILURE: one stage failed. Open the red stage to see why.'
         }
     }
 }
