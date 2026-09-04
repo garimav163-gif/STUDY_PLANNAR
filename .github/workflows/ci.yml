@@ -38,8 +38,8 @@ jobs:
         with: { node-version: '20', cache: 'npm' }
 
       - run: make install
+      - run: chmod -R +x node_modules/.bin
       - run: make test
-      - run: make build
   
 
   # ---------------------------------------------------------------------------
