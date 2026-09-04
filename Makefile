@@ -14,7 +14,7 @@ install:
 	npm install
 
 test:
-	npm test
+	npx jest
 
 build:
 	@echo "no build step"
